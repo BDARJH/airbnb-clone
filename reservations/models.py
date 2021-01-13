@@ -28,4 +28,4 @@ class Reservation(core_models.TimeStampedModel):
     )
 
     def __str__(self):
-        return f"{self.romm} - {self.check_in}"
+        return f"{self.room} - {self.check_in}"

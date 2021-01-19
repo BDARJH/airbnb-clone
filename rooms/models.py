@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django_countries.fields import CountryField
 from core import models as core_models
 
@@ -87,3 +88,10 @@ class Room(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.city = str.capitalize(self.city)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):  # admin패널에서 url로 바로 가게 해줌
+        return reverse("rooms:detail", kwargs={"pk": self.pk})
